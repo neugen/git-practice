@@ -8,13 +8,21 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
  <artifactId>git-practice</artifactId>  
  <version>1</version>  
 
- <dependencies>  
-    <dependency>  
-      <groupId>junit</groupId>  
-      <artifactId>junit</artifactId>  
-      <version>4.8.2</version>  
-      <scope>test</scope>  
-    </dependency>  
+<dependencies>  
+	<dependency>  
+	  <groupId>junit</groupId>  
+	  <artifactId>junit</artifactId>  
+	  <version>4.8.2</version>  
+	  <scope>test</scope>  
+</dependency>  
+
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-core</artifactId>
+	<version>4.3.1.RELEASE</version>
+</dependency>
+
  </dependencies> 
   
 </project>  
