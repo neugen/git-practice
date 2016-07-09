@@ -9,13 +9,21 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
  <version>1</version>  
 
  <dependencies>  
-    <dependency>  
-      <groupId>junit</groupId>  
-      <artifactId>junit</artifactId>  
-      <version>4.8.2</version>  
-      <scope>test</scope>  
-    </dependency>  
+	<dependency>  
+	  <groupId>junit</groupId>  
+	  <artifactId>junit</artifactId>  
+	  <version>4.8.2</version>  
+	  <scope>test</scope>  
+	</dependency>  
  </dependencies> 
+
+<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+<dependency>
+	<groupId>org.hibernate</groupId>
+	<artifactId>hibernate-core</artifactId>
+	<version>5.2.1.Final</version>
+</dependency>
+
   
 </project>  
 
