@@ -38,8 +38,6 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <version>4.3.1.RELEASE</version>
 </dependency>
 
-</dependencies> 
-
 <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
 <dependency>
     <groupId>org.springframework.security</groupId>
@@ -52,6 +50,8 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <artifactId>log4j</artifactId>
     <version>1.2.16</version>
 </dependency>
+
+</dependencies> 
   
 </project>  
 
