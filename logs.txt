@@ -92,7 +92,7 @@ git branch -m v1 hotfix
 git checkout hotfix
 git rebase master
 git checkout master
-git marge hotfix
+git merge hotfix
 
 #now both master and hotfix are on the same revision 538cc56 but remote branch origin/master is on 9084ccc (GitHub current revision)
 git lga
@@ -115,23 +115,106 @@ git commit -am "Correction of the XML"
 
 #need to get just a changes linked to the "Log4j version changed 1.2.16" to master
 git checkout master
+git cherry-pick 8607af0
+#resolve merge conflicts and continue cherry-pick operation
+git cherry-pick --continue
+ 
+#correct XML in master and commit
+git commit -am "Compilation fixes"
+#team-ua decided to change version in their master branch and push changes to remote repository team-ua/master
+cd team-ua
+git commit -am "Versioning changed"
+git push team-ua master
+
+#now original repository ned to fetch lates changes from remote repository origin/master
+git fetch origin
+git lga
+
+* 22335a0 (origin/master) Versioning changed
+| * 8e52e1a (HEAD -> master) Compilation fixes
+| * 8f0a4da Log4j version changed to 1.2.16
+| * 538cc56 (hotfix) Spring Security patch
+|/
+*   9084ccc Manual merge v1 to master
+|\
+| * 11bc160 Spring Context added
+| * cfc5904 Spring Core added
+* | e0a9fbe Hibernate Core added
+|/
+| * 4a5c1fe (logging) Correction of the XML
+| * 8607af0 Log4j version changed to 1.2.16
+| * 15112ca Log4j added
+|/
+* 9883d6b junit dependency
+* b00e874 Initial revision pom.xml 
+
+#rebase head master to remote origin/master
+git rebase origin/master
+
+
+D:\work\sandbox\git-practice>git lga
+* bca0fb3 (HEAD -> master) Compilation fixes
+* 054d18d Log4j version changed to 1.2.16
+* fbe052d Spring Security patch
+* 22335a0 (origin/master) Versioning changed
+| * 4a5c1fe (logging) Correction of the XML
+| * 8607af0 Log4j version changed to 1.2.16
+| * 15112ca Log4j added
+| | * 538cc56 (hotfix) Spring Security patch
+| |/
+|/|
+* |   9084ccc Manual merge v1 to master
+|\ \
+| * | 11bc160 Spring Context added
+| * | cfc5904 Spring Core added
+| |/
+* | e0a9fbe Hibernate Core added
+|/
+* 9883d6b junit dependency
+* b00e874 Initial revision pom.xml
+
+#push latest changes to remote repository and synchronize team-ua
+git push origin master
+cd team-ua
+git fetch team-ua
+git merge team-ua/master
 
 
 
+team-ua>git lga
+* bca0fb3 (HEAD -> master, team-ua/master) Compilation fixes
+* 054d18d Log4j version changed to 1.2.16
+* fbe052d Spring Security patch
+* 22335a0 Versioning changed
+*   9084ccc Manual merge v1 to master
+|\
+| * 11bc160 Spring Context added
+| * cfc5904 Spring Core added
+* | e0a9fbe Hibernate Core added
+|/
+* 9883d6b junit dependency
+* b00e874 Initial revision pom.xml
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+git-practice>git lga
+* bca0fb3 (HEAD -> master, origin/master) Compilation fixes
+* 054d18d Log4j version changed to 1.2.16
+* fbe052d Spring Security patch
+* 22335a0 Versioning changed
+| * 4a5c1fe (logging) Correction of the XML
+| * 8607af0 Log4j version changed to 1.2.16
+| * 15112ca Log4j added
+| | * 538cc56 (hotfix) Spring Security patch
+| |/
+|/|
+* |   9084ccc Manual merge v1 to master
+|\ \
+| * | 11bc160 Spring Context added
+| * | cfc5904 Spring Core added
+| |/
+* | e0a9fbe Hibernate Core added
+|/
+* 9883d6b junit dependency
+* b00e874 Initial revision pom.xml
 
 
 
