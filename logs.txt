@@ -1,0 +1,139 @@
+# clone repository with all revisions from the GitHub
+git clone https://github.com/neugen/git-practice.git
+vim pom.xml
+# stage changes for commit
+git add -A
+# commit changes to local repository
+git commit -m "Initial revision pom.xml"
+# push local repository to remote: git push [remote-name] [branch-name]
+git push
+vim pom.xml
+#stage and commit junit changes to master branch: -am 
+git commit -am "junit depency added"
+# replace previous commit because of mistaken commit message: --amend
+git commit -am "junit dependency" --amend
+#check logs in one line: --oneline
+git log  --oneline
+#create v1 branch from the HEAD revision of the master branch
+git branch v1 HEAD
+#commit spring core to v1 branch
+git commit -am "Spring Core added"
+#switch to master branch 
+git checkout master
+#commit hibernate core to master branch
+git commit -am "Hibernate Core added"
+#check branches graph in console
+git log --graph --all
+#commit additional depency to v1 branch
+git checkout v1
+git commit -am "Spring Context added"
+#swith to master and try to merge v1 changes with fast-forward option to master branch
+git checkout master
+git merge --ff-only v1
+#fast-forward is imposible since master HEAD is not a root of v1, manual marge needed.
+git merge v1
+#need to resolve conflicts with merge tools and commit merged files to master
+git mergetool 
+git commit -am "Manual merge v1 to master"
+#check logs in graph
+git log  --oneline --graph --all --decorate
+*   9084ccc (HEAD -> master) Manual merge v1 to master
+|\
+| * 11bc160 (v1) Spring Context added
+| * cfc5904 Spring Core added
+* | e0a9fbe Hibernate Core added
+|/
+* 9883d6b junit dependency
+* b00e874 (origin/master) Initial revision pom.xml
+#add Spring Security to V1
+git checkout v1
+git commit -am "Spring Security patch"
+#list branches
+git branch -v
+  master 9084ccc [ahead 5] Manual merge v1 to master
+* v1     a5f64bd Spring Security patch
+
+#create team-ua folder and with remote git-practice
+mkdir ../team-ua
+cd ../team-ua
+git init
+git remote add team-ua https://github.com/neugen/git-practice.git
+git remote -v
+team-ua https://github.com/neugen/git-practice.git (fetch)
+team-ua https://github.com/neugen/git-practice.git (push) 
+
+team-ua>git log
+fatal: your current branch 'master' does not have any commits yet
+
+team-ua>git log team-ua/master
+commit b00e8743655da707fc3307723f5fad9a6c50e5e1
+Author: Eugen <Eugen>
+Date:   Sat Jul 9 17:10:11 2016 -0400
+
+    Initial revision pom.xml
+#need to copy data to local repository by merging revisions from the remote branch team-ua/master
+git merge team-ua/master
+#git fetch; git merge team-ua/master is an analog of git pull team-ua master
+
+#swith to the main git repository and push latest changes from master branch
+git checkout master
+git push
+
+#switch to team-ua and pull all the changes from remote with fast forward
+git pull team-ua master
+
+#make alias to logging branches
+git config --global alias.lga "log --oneline --graph --all --decorate"
+
+#switch to main and rename v1 local branch to hotfix
+git branch -m v1 hotfix
+
+#rebase hotfix branch to master branch and merge master fast forward to hotfix revision
+git checkout hotfix
+git rebase master
+git checkout master
+git marge hotfix
+
+#now both master and hotfix are on the same revision 538cc56 but remote branch origin/master is on 9084ccc (GitHub current revision)
+git lga
+* 538cc56 (HEAD -> master, hotfix) Spring Security patch
+*   9084ccc (origin/master) Manual merge v1 to master
+|\
+| * 11bc160 Spring Context added
+| * cfc5904 Spring Core added
+* | e0a9fbe Hibernate Core added
+|/
+* 9883d6b junit dependency
+* b00e874 Initial revision pom.xml
+
+#create additional branch for logging based on junit revision 9883d6b
+git branch logging 9883d6b
+git checkout logging
+git commit -am "Log4j added"
+git commit -am "Log4j version changed to 1.2.16"
+git commit -am "Correction of the XML"
+
+#need to get just a changes linked to the "Log4j version changed 1.2.16" to master
+git checkout master
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#check all the revisions even of the deleted branches 
+git reflog 
